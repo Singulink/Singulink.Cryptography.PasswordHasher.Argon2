@@ -14,6 +14,7 @@ namespace Singulink.Cryptography.Tests
             var hasher = new PasswordHasher(new Argon2HashAlgorithm(Argon2Type.Argon2id, Argon2Version.V19, 4, 512), 2);
             string hash = hasher.Hash(Password);
 
+            Assert.IsFalse(hasher.Verify(hash, Password + " "));
             Assert.IsTrue(hasher.Verify(hash, Password));
             Assert.IsTrue(hash.StartsWith("!1 Argon2idV19-128-4P-512MB", StringComparison.Ordinal));
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+
 using Isopoh.Cryptography.Argon2;
 using IArgon2 = Isopoh.Cryptography.Argon2;
 
@@ -99,7 +100,7 @@ namespace Singulink.Cryptography
             using var result = argon2.Hash();
             Debug.Assert(result.Buffer.Length == HashLength, "Unexpected hash length.");
 
-            return result.Buffer;
+            return (byte[])result.Buffer.Clone();
         }
     }
 }
